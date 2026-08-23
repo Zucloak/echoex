@@ -1,15 +1,16 @@
-# Multi-stage Dockerfile for Echoex Node Anchor
-FROM node:22-alpine AS runtime
+﻿FROM rust:1.76-slim as builder
 
 WORKDIR /app
-
-COPY package.json ./
-RUN npm install --omit=dev --ignore-scripts
-
-COPY bin ./bin
+COPY Cargo.toml Cargo.lock* ./
 COPY src ./src
 
-ENV NODE_ENV=production
-ENV ECHOEX_SERVER=https://bulkmetadataeditor.com
+RUN cargo build --release
 
-ENTRYPOINT ["node", "bin/echoex-node.js"]
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /app/target/release/echoex-node /usr/local/bin/
+
+ENTRYPOINT ["echoex-node"]

@@ -1,0 +1,28 @@
+﻿[package]
+name = "echoex-node"
+version = "0.1.0"
+edition = "2021"
+description = "Echoex Node Anchor — zero-knowledge Chamber anchor daemon for BulkMetaEdit"
+license = "Apache-2.0"
+repository = "https://github.com/Zucloak/echoex"
+
+[[bin]]
+name = "echoex-node"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = { version = "0.21", features = ["native-tls"] }
+tungstenite = "0.21"
+futures-util = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive", "env"] }
+url = "2"
+urlencoding = "2"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

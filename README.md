@@ -1,51 +1,60 @@
-# 🌐 Echoex Node Anchor
+﻿# 🌐 Echoex Node Anchor
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-green.svg?logo=node.js)](https://nodejs.org/)
+[![Language](https://img.shields.io/badge/Language-Rust-orange.svg?logo=rust)](https://www.rust-lang.org/)
 
-**Echoex Node Anchor** is an ultra-lightweight, headless daemon that anchors your private [Echoex Chambers](https://github.com/Zucloak/bulkmetadataeditor) 24/7 in Cloudflare Durable Object memory.
+**Echoex Node Anchor** is an ultra-fast, zero-knowledge Rust daemon that anchors your private [Echoex Chambers](https://github.com/Zucloak/bulkmetadataeditor) 24/7 in Cloudflare Durable Object memory.
 
-By running a Node Anchor on a Raspberry Pi, home server, NAS (Synology, QNAP), or cloud VPS, you eliminate the need to keep your personal browser tab open or your computer running just to maintain chamber state and WebRTC connectivity.
+By running an Echoex Node Anchor on a Raspberry Pi, home server, NAS (Synology, QNAP), or cloud VPS, you eliminate the need to keep your personal browser tab open or your computer running just to maintain chamber state and WebRTC connectivity.
 
 ---
 
 ## ⚡ Quick Start
 
-### 1. Instant Run via NPX (No installation required)
+### 1. Download Binary (Recommended)
+
+Pick your platform from the latest release:
+
+| Platform | Download |
+|----------|----------|
+| Linux x64 | `echoex-node-linux-x64` |
+| Linux ARM64 (Raspberry Pi) | `echoex-node-linux-arm64` |
+| macOS Intel | `echoex-node-macos-x64` |
+| macOS Apple Silicon | `echoex-node-macos-arm64` |
+| Windows | `echoex-node-windows-x64.exe` |
 
 ```bash
-npx echoex-node --token <YOUR_TOKEN> --chamber <CHAMBER_CODE>
+chmod +x echoex-node-linux-x64
+./echoex-node-linux-x64 --token <YOUR_TOKEN> --chamber <CHAMBER_CODE>
 ```
 
 ---
 
-### 2. Docker Run (Recommended for Linux, Raspberry Pi, VPS)
+### 2. Docker
 
 ```bash
 docker run -d \
   --name echoex-node \
   --restart unless-stopped \
-  zucloak/echoex:latest \
-  --token <YOUR_TOKEN> \
-  --chamber <CHAMBER_CODE>
+  -e ECHOEX_TOKEN=your_token \
+  -e ECHOEX_CHAMBER=your_room_code \
+  echoex/node:latest
 ```
 
 ---
 
-### 3. Docker Compose (NAS / Portainer / TrueNAS)
+### 3. Docker Compose
 
 ```yaml
 version: '3.8'
 
 services:
   echoex-node:
-    image: zucloak/echoex:latest
-    container_name: echoex-node
+    image: echoex/node:latest
     restart: unless-stopped
     environment:
-      - ECHOEX_TOKEN=your_token_here
-      - ECHOEX_CHAMBER=your_chamber_code_here
-      - ECHOEX_NODE_NAME=Raspberry Pi 4
+      - ECHOEX_TOKEN=your_token
+      - ECHOEX_CHAMBER=your_room_code
 ```
 
 Start the container:
@@ -59,19 +68,19 @@ docker compose up -d
 
 | Flag | Environment Variable | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `-t`, `--token` | `ECHOEX_TOKEN` | *(Required)* | Secret node token generated from the Chamber Settings modal |
-| `-c`, `--chamber` | `ECHOEX_CHAMBER` | *(Required)* | 8-character Chamber Room Code |
-| `-n`, `--name` | `ECHOEX_NODE_NAME` | `Echoex Node` | Friendly anchor display name in the Chamber Member List |
-| `-s`, `--server` | `ECHOEX_SERVER` | `https://bulkmetadataeditor.com` | Signaling server host |
-| `--no-relay` | `ECHOEX_DISABLE_RELAY` | `false` | Disable blind WebRTC encrypted packet relay donation |
+| `--token` | `ECHOEX_TOKEN` | *(Required)* | Secret node token generated from Chamber Settings |
+| `--chamber` | `ECHOEX_CHAMBER` | *(Required)* | 8-character Chamber Room Code |
+| `--name` | `ECHOEX_NAME` | `Echoex Node` | Friendly anchor display name in the Member List |
+| `--host` | `ECHOEX_HOST` | `bulkmetadataeditor.com` | Signaling server host |
+| `--reconnect-delay` | `ECHOEX_RECONNECT_DELAY` | `5` | Delay in seconds before reconnecting on disconnect |
 
 ---
 
-## 🔒 Security & Ephemeral Architecture
+## 🔒 Security & Privacy Guarantee
 
-- **Zero Plaintext Storage**: The anchor daemon never writes chat messages, decryption keys, or metadata to disk. All data is processed purely in ephemeral RAM.
-- **End-to-End Encrypted**: Swarm packet relays only route ciphertext. The anchor cannot inspect user payloads.
-- **Token-Authenticated**: Authenticates directly with the chamber’s Cloudflare Durable Object SQLite memory.
+- **Zero Content Storage**: The anchor daemon never writes chat messages, decryption keys, or metadata to disk.
+- **Zero Inspection**: Does not inspect, decrypt, or log any message payloads.
+- **End-to-End Encrypted**: Operates purely as a headless signaling presence.
 
 ---
 

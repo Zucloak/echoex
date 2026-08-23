@@ -1,17 +1,11 @@
-version: '3.8'
+﻿version: '3.8'
 
 services:
   echoex-node:
-    image: zucloak/echoex:latest
-    container_name: echoex-node
+    image: echoex/node:latest
     restart: unless-stopped
     environment:
       - ECHOEX_TOKEN=${ECHOEX_TOKEN}
       - ECHOEX_CHAMBER=${ECHOEX_CHAMBER}
-      - ECHOEX_NODE_NAME=${ECHOEX_NODE_NAME:-Home Server Anchor}
-      - ECHOEX_SERVER=${ECHOEX_SERVER:-https://bulkmetadataeditor.com}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      - ECHOEX_NAME=${ECHOEX_NAME:-Echoex Node}
+      - ECHOEX_HOST=${ECHOEX_HOST:-bulkmetadataeditor.com}
