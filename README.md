@@ -1,4 +1,4 @@
-﻿# 🌐 Echoex Node Anchor
+# 🌐 Echoex Node Anchor
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Language](https://img.shields.io/badge/Language-Rust-orange.svg?logo=rust)](https://www.rust-lang.org/)
@@ -76,11 +76,24 @@ docker compose up -d
 
 ---
 
+---
+
+## 🧩 Echoex Add-ons Library
+
+Echoex Chambers can be extended with privacy-respecting, zero-tracking third-party integrations (Piped, Invidious, LibreTranslate, PrivateBin, custom REST APIs).
+
+- **Catalog & Specs**: See [`addons/README.md`](./addons/README.md)
+- **Official Registry**: See [`addons/catalog.json`](./addons/catalog.json)
+- **Contributing & Submissions**: See [`addons/CONTRIBUTING.md`](./addons/CONTRIBUTING.md)
+
+---
+
 ## 🔒 Security & Privacy Guarantee
 
 - **Zero Content Storage**: The anchor daemon never writes chat messages, decryption keys, or metadata to disk.
 - **Zero Inspection**: Does not inspect, decrypt, or log any message payloads.
 - **End-to-End Encrypted**: Operates purely as a headless signaling presence.
+- **Client-Side Add-ons**: Add-on queries execute client-to-instance directly without intermediate logging.
 
 ---
 

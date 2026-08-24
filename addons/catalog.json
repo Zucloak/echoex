@@ -1,0 +1,77 @@
+[
+  {
+    "templateId": "piped",
+    "displayName": "Piped",
+    "description": "Stream YouTube music and video privately via your own Piped instance.",
+    "category": "media",
+    "defaultName": "piped",
+    "instanceUrlPlaceholder": "https://piped.your-domain.com",
+    "instanceUrlLabel": "Your Piped instance URL",
+    "endpoints": {
+      "search": "/search?q={query}&filter=all"
+    },
+    "responseType": "list",
+    "disclaimer": "BME does not operate or provide any Piped instance. You are responsible for your configured instance and compliance with applicable terms of service.",
+    "learnMoreUrl": "https://github.com/TeamPiped/Piped"
+  },
+  {
+    "templateId": "invidious",
+    "displayName": "Invidious",
+    "description": "Browse YouTube privately via your own Invidious instance.",
+    "category": "media",
+    "defaultName": "yt",
+    "instanceUrlPlaceholder": "https://invidious.your-domain.com",
+    "instanceUrlLabel": "Your Invidious instance URL",
+    "endpoints": {
+      "search": "/api/v1/search?q={query}"
+    },
+    "responseType": "list",
+    "disclaimer": "BME does not operate or provide any Invidious instance. You are responsible for your configured instance.",
+    "learnMoreUrl": "https://github.com/iv-org/invidious"
+  },
+  {
+    "templateId": "libretranslate",
+    "displayName": "LibreTranslate",
+    "description": "Translate messages privately via your own LibreTranslate instance.",
+    "category": "utility",
+    "defaultName": "translate",
+    "instanceUrlPlaceholder": "https://translate.your-domain.com",
+    "instanceUrlLabel": "Your LibreTranslate instance URL",
+    "endpoints": {
+      "action": "/translate"
+    },
+    "responseType": "text",
+    "disclaimer": "BME does not operate any translation service.",
+    "learnMoreUrl": "https://github.com/LibreTranslate/LibreTranslate"
+  },
+  {
+    "templateId": "privatebin",
+    "displayName": "PrivateBin",
+    "description": "Share ephemeral encrypted pastes via your own PrivateBin instance.",
+    "category": "utility",
+    "defaultName": "paste",
+    "instanceUrlPlaceholder": "https://paste.your-domain.com",
+    "instanceUrlLabel": "Your PrivateBin instance URL",
+    "endpoints": {
+      "action": "/"
+    },
+    "responseType": "embed",
+    "disclaimer": "BME does not operate any paste service.",
+    "learnMoreUrl": "https://github.com/PrivateBin/PrivateBin"
+  },
+  {
+    "templateId": "custom",
+    "displayName": "Custom Add-on",
+    "description": "Connect any HTTP API endpoint as a custom Chamber add-on.",
+    "category": "custom",
+    "defaultName": "custom",
+    "instanceUrlPlaceholder": "https://your-api.com",
+    "instanceUrlLabel": "API endpoint URL",
+    "endpoints": {
+      "search": "?q={query}"
+    },
+    "responseType": "list",
+    "disclaimer": "Custom add-ons connect to endpoints you configure. BME has no visibility into or responsibility for these endpoints.",
+    "learnMoreUrl": "https://github.com/Zucloak/echoex/tree/main/addons"
+  }
+]
